@@ -1,0 +1,23 @@
+hello {{title}}
+<br>
+<button type="button" [disabled]="isDisabled">{{myBtn}}</button>
+<br>
+<img alt="angularImg" height="150px" width="150px" [src]="imagePath"/>
+
+<br>
+<div [style.backgroundColor] = "bgColor">
+    <h2 [style.color] = "titleColor">title</h2>
+    <p [style] = "description">description</p>
+</div>
+
+<br>
+<button (click)="IncrementCounter()">Increment counter</button>
+<p>counter is = {{counter}}</p>
+
+<br>
+<!-- <p [class.textColor]="redText">apply class on this text</p> -->
+<p [class.textColor]="redText == 'yes'">apply class on this text</p>
+
+<!-- <br>
+<input [(ngModel)]="inputText" placeholder="Enter text">
+<p>you typed  {{inputText}}</p> -->
