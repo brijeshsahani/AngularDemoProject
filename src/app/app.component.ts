@@ -28,6 +28,29 @@ export class AppComponent {
   //redText: boolean = true;
   redText:string = "yes";
 
+  //builtin Attribute Directives
   //two way databinding
-  //inputText: string = "initial value";
+  inputText: string = "initial value";
+
+  //ngClass = apply multiple classess using the variable
+  message: string = "this is danger message";
+  classes: string ="danger text-size";
+
+  //ngStyle
+  selectedColor: string = "red";
+
+
+  //Structure Directives - ngIf ngFor ngSwitch
+  isLoggedIn:boolean =true;
+  username: string = "brijesh"
+
+  names: string[] = ["brijesh", "sahani", "kumar"];
+
+  grade: string ="A";
+
+  //Build in Pipes
+  pipeTitle = "Pipes";
+  today:number = Date.now();
+
+  currency:number = 1.3465
 }

@@ -1,4 +1,4 @@
-hello {{title}}
+hello {{title}} <!--Interpolaction-->
 <br>
 <button type="button" [disabled]="isDisabled">{{myBtn}}</button>
 <br>
@@ -18,6 +18,69 @@ hello {{title}}
 <!-- <p [class.textColor]="redText">apply class on this text</p> -->
 <p [class.textColor]="redText == 'yes'">apply class on this text</p>
 
-<!-- <br>
-<input [(ngModel)]="inputText" placeholder="Enter text">
-<p>you typed  {{inputText}}</p> -->
+<br>
+<input [(ngModel)]="inputText" placeholder="Enter text"> <!-- ngModel is builtin Attribute Directives , 2 way databinding-->
+<p>you entered  {{inputText}}</p> 
+
+<br>
+<div [ngClass]="classes">
+    {{message}}
+</div>
+
+<br>
+
+<div class="color-box" [ngStyle]="{'background-color':selectedColor}"> <!--add new style with class-->
+    boxx
+</div>
+
+<br>
+<label>--Structure Directives - ngIf--</label>
+<div *ngIf="isLoggedIn">welcome {{username}}</div>
+<div *ngIf="!isLoggedIn">please login</div>
+<div *ngIf="isLoggedIn && true">Login content</div>
+
+<br>
+<label>--Structure Directives - ngIf else--</label><br>
+ <div *ngIf="isLoggedIn; else logout">welcome {{username}} ..</div>
+ <ng-template #logout>please login..</ng-template>
+
+<br>
+<label>--Structure Directives - ngfor--</label><br>
+<ul>
+    <li *ngFor="let name of names; let i =index">{{i}} {{ name }}</li>
+</ul>
+
+<br>
+<label>--Structure Directives - ngswitch--</label><br>
+
+<div [ngSwitch]="grade">
+    <p *ngSwitchCase="'A'">Execllent</p>
+    <p *ngSwitchCase="'B'">Good</p>
+    <p *ngSwitchDefault="">Unknown</p>
+</div>
+
+<br>
+<!--Pipe-->
+<!-- case pipe -->
+<label>--Build in Pipes--</label><br>
+<h1>{{pipeTitle | uppercase}}</h1>
+
+<!-- date pipe -->
+<div>
+    <p>Today is {{today}}</p>
+    <p>Today is {{today | date}}</p>
+    <p>Today is {{today | date : "fullDate"}}</p>
+    <p>Today is {{today | date : "hh:mm:ss"}}</p>
+</div>
+
+<!-- currency pipe -->
+<p>{{currency | currency}}</p>
+<p>{{currency | currency: "EUR"}}</p>
+<p>{{currency | currency: "EUR" : "symbol" : "2.1-3"}}</p>
+
+<!-- percentage pipe -->
+<p>{{currency | percent}}</p>
+
+
+<!--Custom Pipe = (ng generate pipe pipes/append) -->
+<h1>{{pipeTitle | append:"Custom1" }}</h1>

@@ -1,3 +1,18 @@
 .textColor{
     color:blueviolet;
 }
+
+.danger{
+    background-color: lightcoral;
+    color: greenyellow;
+}
+
+.text-size{
+    font-size: 40px;
+}
+
+.color-box{
+    width: 100px;
+    height: 100px;
+    background-color: lightseagreen;
+}
