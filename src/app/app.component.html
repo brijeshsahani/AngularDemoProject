@@ -1,11 +1,11 @@
 hello {{title}} <!--Interpolaction-->
 <br>
-<button type="button" [disabled]="isDisabled">{{myBtn}}</button>
+<button type="button" [disabled]="isDisabled">{{myBtn}}</button><!--attribute binding-->
 <br>
 <img alt="angularImg" height="150px" width="150px" [src]="imagePath"/>
 
 <br>
-<div [style.backgroundColor] = "bgColor">
+<div [style.backgroundColor] = "bgColor"> <!--style binding-->
     <h2 [style.color] = "titleColor">title</h2>
     <p [style] = "description">description</p>
 </div>
@@ -19,21 +19,25 @@ hello {{title}} <!--Interpolaction-->
 <p [class.textColor]="redText == 'yes'">apply class on this text</p>
 
 <br>
+<!-- Two way databinding -->
 <input [(ngModel)]="inputText" placeholder="Enter text"> <!-- ngModel is builtin Attribute Directives , 2 way databinding-->
 <p>you entered  {{inputText}}</p> 
 
+<!-- builtin Attribute Directives	 -->
+<!-- ngClass -->
 <br>
 <div [ngClass]="classes">
     {{message}}
 </div>
 
 <br>
-
+<!-- ngStyle -->
 <div class="color-box" [ngStyle]="{'background-color':selectedColor}"> <!--add new style with class-->
     boxx
 </div>
 
 <br>
+<!-- Structure Directives -->
 <label>--Structure Directives - ngIf--</label>
 <div *ngIf="isLoggedIn">welcome {{username}}</div>
 <div *ngIf="!isLoggedIn">please login</div>
@@ -84,3 +88,40 @@ hello {{title}} <!--Interpolaction-->
 
 <!--Custom Pipe = (ng generate pipe pipes/append) -->
 <h1>{{pipeTitle | append:"Custom1" }}</h1>
+
+<!-- dependency injection  (created on service using "command ng g s services/messages" command)-->
+ <h1>dependency injection</h1>
+ <p>{{messages}}</p>
+
+ <!-- API Integration -->
+  <h1>API Posts Data</h1>
+  <div *ngFor="let post of posts">
+    <h3>{{post.title}}</h3>
+    <p>{{post.body}}</p>
+    <hr/>
+  </div>
+
+  <h1>API Posts Data with interface</h1>
+  <div *ngFor="let post of posts1">
+    <h3>{{post.title}}</h3>
+    <p>{{post.body}}</p>
+    <hr/>
+  </div>
+
+  <br/>
+  <div>
+    <label>User</label>
+    <form #userForm="ngForm" (ngSubmit)= "submitForm(userForm)">
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" [(ngModel)]="user.name" required/>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" [(ngModel)]="user.email" required/>
+        </div>
+        <div>
+            <button type="submit" [disabled]="userForm.invalid || !validateEmail()">Submit</button>
+        </div>
+    </form>
+  </div>
