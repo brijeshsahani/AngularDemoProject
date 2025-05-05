@@ -109,7 +109,9 @@ hello {{title}} <!--Interpolaction-->
   </div>
 
   <br/>
+  <!-- Template Driven form -->
   <div>
+    <h1>Template Driven form</h1>
     <label>User</label>
     <form #userForm="ngForm" (ngSubmit)= "submitForm(userForm)">
         <div>
@@ -122,6 +124,33 @@ hello {{title}} <!--Interpolaction-->
         </div>
         <div>
             <button type="submit" [disabled]="userForm.invalid || !validateEmail()">Submit</button>
+        </div>
+    </form>
+  </div>
+
+  <!-- Reactive form -->
+
+  <div>
+    <br>
+    <h1>Reactive form</h1>
+    <form [formGroup]="userReactiveForm" (ngSubmit)="SubmitReactiveForm()"> <!-- parent formGroup  -->
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="Name" formControlName="name"/>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" placeholder="Email" formControlName="email"/>
+        </div>
+        <div formGroupName="address"> <!-- subfrom   nestedform-->
+            <label for="street">Email:</label>
+            <input type="text" id="street" name="street" placeholder="Street" formControlName="street"/>
+
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" placeholder="City" formControlName="city"/>
+        </div>
+        <div>
+            <button type="submit" [disabled]="userReactiveForm.invalid">Submit</button>
         </div>
     </form>
   </div>

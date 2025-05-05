@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core'; //onInit also added here 
-import { NgForm } from '@angular/forms';
+import { NgForm, Validators } from '@angular/forms'; //for template driven form 
+import { FormBuilder,FormGroup, Validator } from '@angular/forms'; //for Reactive form
 import { MessagesService } from './services/messages.service'; //added
 import { Post } from './interfaces/posts.interface';
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -60,9 +62,9 @@ export class AppComponent implements OnInit{
 
   //dependency injection (create a sevice, inject using constructor)
   messages: string[] = [];
-  constructor(private messagesService:MessagesService){
-    this.messages = messagesService.getMessage();
-  }
+  // constructor(private messagesService:MessagesService){
+  //   this.messages = messagesService.getMessage();
+  // }
 
   //for api calling  "ngOnInit automatic trigger"
   posts: any[] =[];
@@ -76,24 +78,24 @@ export class AppComponent implements OnInit{
       //   console.log(error);
       // });
 
-      this.messagesService.getPost().subscribe({
-        next: (response) => {
-          this.posts = response;
-        },
-        error: (error) => {
-          console.error(error);
-        },
-      });
+      // this.messagesService.getPost().subscribe({
+      //   next: (response) => {
+      //     this.posts = response;
+      //   },
+      //   error: (error) => {
+      //     console.error(error);
+      //   },
+      // });
 
-      //for type checking with interfaces
-      this.messagesService.getPost1().subscribe({
-        next: (response: Post[]) => { //with interface post
-          this.posts1 = response;
-        },
-        error: (error) => {
-          console.error(error);
-        },
-      });
+      // //for type checking with interfaces
+      // this.messagesService.getPost1().subscribe({
+      //   next: (response: Post[]) => { //with interface post
+      //     this.posts1 = response;
+      //   },
+      //   error: (error) => {
+      //     console.error(error);
+      //   },
+      // });
   }
 
   //template driven form
@@ -107,8 +109,35 @@ export class AppComponent implements OnInit{
       console.log(form.value, this.user);//check binding is working or not
     }
   } 
+
   validateEmail():boolean{ 
     const emailRegex= /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/; //email regex
     return emailRegex.test(this.user.email);
   }
+
+  //Reactive form
+
+  userReactiveForm! :FormGroup;
+
+  constructor(private formBuilder:FormBuilder){
+    this.userReactiveForm = this.formBuilder.group({
+      name: ["", Validators.required],
+      email: ["", [
+        Validators.required,
+        Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)
+      ]],
+      address: this.formBuilder.group({
+        street: ["", Validators.required],
+        city: ["", Validators.required]
+      })
+
+    })
+  }
+
+  SubmitReactiveForm(){
+    if(this.userReactiveForm.valid){
+      console.log(this.userReactiveForm.value)
+    }
+  }
+
 }
