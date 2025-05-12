@@ -20,6 +20,10 @@ import { TranslateLoader,TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 // import { HttpClientModule,HttpClient } from '@angular/common/http';
 
+//lazyLoading
+import { HomeLazyComponent } from './components/home-lazy/home-lazy.component';
+
+
 export function HttpLoaderFactory(http: HttpClient){
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -28,7 +32,7 @@ export function HttpLoaderFactory(http: HttpClient){
   declarations: [
     AppComponent,
     AppendPipe, //added
-    TaskComponent, NoteComponent, NotesComponent, NotFoundComponent, AboutComponent, AboutProjectsComponent, AboutSponsorsComponent //added
+    TaskComponent, NoteComponent, NotesComponent, NotFoundComponent, AboutComponent, AboutProjectsComponent, AboutSponsorsComponent, HomeLazyComponent //added
   ],
   imports: [
     BrowserModule,

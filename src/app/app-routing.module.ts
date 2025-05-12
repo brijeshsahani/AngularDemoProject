@@ -6,6 +6,7 @@ import {NotFoundComponent} from './components/not-found/not-found.component';
 import { AboutComponent } from './components/about/about.component';
 import { AboutProjectsComponent } from './components/about-projects/about-projects.component';
 import { AboutSponsorsComponent } from './components/about-sponsors/about-sponsors.component';
+import { HomeLazyComponent } from './components/home-lazy/home-lazy.component';
 
 const routes: Routes = [ //give title for each route using "title"
   {path: "", redirectTo: "/notes", pathMatch:'full'},
@@ -25,7 +26,12 @@ const routes: Routes = [ //give title for each route using "title"
         },
       ],
     },
+  // {path: "", component:HomeLazyComponent},
+  { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },// Lazy Loading
+  { path: 'analytics', loadChildren: () => import('./analytics/analytics.module').then(m => m.AnalyticsModule) }, // Lazy Loading
   {path:"**", title:"Not Found", component:NotFoundComponent }, //not found (when trigger not exist route the show this Component)
+
+ 
 
 ];
 

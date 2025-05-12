@@ -189,6 +189,7 @@ hello {{title}} <!--Interpolaction-->
 
         <!-- nested route -->
         <li><a routerLink="/about">About</a></li>
+
     </ul>
    </nav>
    <router-outlet></router-outlet>  <!-- show route content here -->
@@ -198,3 +199,8 @@ hello {{title}} <!--Interpolaction-->
 
    <label>Internationalization</label>
    <h1>{{"greeting" | translate}}</h1>
+
+    <!-- Lazy Loading -->
+     <button type="button" routerLink="/auth">Auth</button>
+     <button type="button" routerLink="/analytics">Analytics</button>
+
