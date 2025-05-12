@@ -172,3 +172,24 @@ hello {{title}} <!--Interpolaction-->
     <h1>Task List</h1>
     <app-task *ngFor="let t of tasks" [childTask]="t" (taskDeleted)="deleteTask(t)"></app-task>
   </div>
+
+  <!-- Routes ="It's used to dynamically load different components based on the current URL route." -->
+   <h1>Routes</h1>
+   <nav>
+    <ul>
+        <li><a routerLink="/">Home</a></li>
+        <li><a routerLink="/notes">Notes</a></li>
+          <!-- Navigate throw html ui -->
+        <li><a [routerLink]="['/notes','1']">Notes 1</a></li>
+        <li><a [routerLink]="['/notes','2']">Notes 2</a></li>
+        <li><a [routerLink]="['/notes','3']">Notes 3</a></li>
+        <!-- Navigate throw typescript file -->
+        <button (click)="navigateToNotes()">Go to Notes</button>
+        <button (click)="navigateToNote(45)">Go to Note 45</button>
+
+        <!-- nested route -->
+        <li><a routerLink="/about">About</a></li>
+    </ul>
+   </nav>
+   <router-outlet></router-outlet>  <!-- show route content here -->
+   <h1>Footer</h1>

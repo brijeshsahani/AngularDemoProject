@@ -1,0 +1,15 @@
+<p>about works!</p>
+
+<nav>
+    <ul>
+        <li><a routerLink="/about/projects">Projects</a></li>
+        <li><a routerLink="/about/projects" [queryParams]="{projectId:123}">Project with query param</a></li>
+
+        <!-- <li><a routerLink="/about/sponsors">Sponsors</a></li> -->
+
+        <li><a [routerLink]="['sponsors']">Sponsors</a></li>    <!-- automatically get parent path -->
+
+    </ul>
+</nav>
+
+<router-outlet></router-outlet>

@@ -4,6 +4,7 @@ import { FormBuilder,FormGroup, Validator } from '@angular/forms'; //for Reactiv
 import { MessagesService } from './services/messages.service'; //added
 import { Post } from './interfaces/posts.interface';
 import { from } from 'rxjs';
+import { Router } from '@angular/router'; //for route
 
 @Component({
   selector: 'app-root',
@@ -119,7 +120,7 @@ export class AppComponent implements OnInit{
 
   userReactiveForm! :FormGroup;
 
-  constructor(private formBuilder:FormBuilder ,private messagesService:MessagesService){
+  constructor(private formBuilder:FormBuilder ,private messagesService:MessagesService, private router:Router){
     this.userReactiveForm = this.formBuilder.group({
       name: ["", Validators.required],
       email: ["", [
@@ -166,5 +167,14 @@ export class AppComponent implements OnInit{
 
   deleteTask(task: string){
     this.tasks = this.tasks.filter((t) => t !== task);
+  }
+
+  //route 
+ // to create instance of that router check constructor
+  navigateToNotes(){
+    this.router.navigate(["/notes"]);
+  }
+  navigateToNote(id:number){
+    this.router.navigate(["/notes",id]);
   }
 }
