@@ -5,6 +5,7 @@ import { MessagesService } from './services/messages.service'; //added
 import { Post } from './interfaces/posts.interface';
 import { from } from 'rxjs';
 import { Router } from '@angular/router'; //for route
+import { TranslateService } from '@ngx-translate/core'; //Internationalization
 
 @Component({
   selector: 'app-root',
@@ -120,7 +121,7 @@ export class AppComponent implements OnInit{
 
   userReactiveForm! :FormGroup;
 
-  constructor(private formBuilder:FormBuilder ,private messagesService:MessagesService, private router:Router){
+  constructor(private formBuilder:FormBuilder ,private messagesService:MessagesService, private router:Router, private translateService:TranslateService){
     this.userReactiveForm = this.formBuilder.group({
       name: ["", Validators.required],
       email: ["", [
@@ -139,6 +140,14 @@ export class AppComponent implements OnInit{
       ])
 
     })
+
+    //Internationalization
+
+    const userLang = navigator.language || 'en'; // get brower languauge
+    const languageCode = userLang.split('-')[0]; //split and get value
+    this.translateService.setDefaultLang(languageCode);
+    this.translateService.use(languageCode);
+
   }
 
   get phoneNumbers(){

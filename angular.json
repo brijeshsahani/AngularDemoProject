@@ -6,6 +6,13 @@
     "DemoProject": {
       "projectType": "application",
       "schematics": {},
+      "i18n": {
+        "sourceLocale" :"en",
+        "locales": {
+          "fr":"src/assets/i18n/fr.json",
+          "eg":"src/assets/i18n/en.json"
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
