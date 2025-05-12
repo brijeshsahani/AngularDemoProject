@@ -7,11 +7,12 @@ import { AboutComponent } from './components/about/about.component';
 import { AboutProjectsComponent } from './components/about-projects/about-projects.component';
 import { AboutSponsorsComponent } from './components/about-sponsors/about-sponsors.component';
 import { HomeLazyComponent } from './components/home-lazy/home-lazy.component';
+import { authGuardGuard } from './guards/auth-guard.guard';
 
 const routes: Routes = [ //give title for each route using "title"
   {path: "", redirectTo: "/notes", pathMatch:'full'},
-  {path:"notes", title:"Notes", component:NotesComponent },
-  {path:"notes/:id", title:"Single Note", component:NoteComponent }, //dynamic take id value
+  {path:"notes", title:"Notes", component:NotesComponent ,canActivate:[authGuardGuard] },
+  {path:"notes/:id", title:"Single Note", component:NoteComponent , canActivate:[authGuardGuard] }, //dynamic take id value
   {path:"about", title:"About", component:AboutComponent, 
     children:[
         {
