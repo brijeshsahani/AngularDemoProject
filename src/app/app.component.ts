@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'; //onInit also added here 
-import { NgForm, Validators } from '@angular/forms'; //for template driven form 
+import { FormArray, NgForm, Validators } from '@angular/forms'; //for template driven form 
 import { FormBuilder,FormGroup, Validator } from '@angular/forms'; //for Reactive form
 import { MessagesService } from './services/messages.service'; //added
 import { Post } from './interfaces/posts.interface';
@@ -129,9 +129,29 @@ export class AppComponent implements OnInit{
       address: this.formBuilder.group({
         street: ["", Validators.required],
         city: ["", Validators.required]
-      })
+      }),
+      phoneNumbers:this.formBuilder.array([
+        this.formBuilder.control('',[
+          Validators.required,
+          Validators.pattern(/^\d{10}$/)
+        ])
+      ])
 
     })
+  }
+
+  get phoneNumbers(){
+    return this.userReactiveForm.get('phoneNumbers') as FormArray;
+  }
+
+  removePhoneNumber(index: number){
+    this.phoneNumbers.removeAt(index)
+  }
+
+  addPhoneNumber(){
+    this.phoneNumbers.push(
+      this.formBuilder.control('',[Validators.required, Validators.pattern(/^\d{10}$/)])
+    )
   }
 
   SubmitReactiveForm(){
