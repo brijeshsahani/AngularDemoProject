@@ -6,11 +6,13 @@ import {HttpClientModule} from '@angular/common/http' //added for API Integratio
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppendPipe } from './pipes/append.pipe';
+import { TaskComponent } from './components/task/task.component'; //added when create component 
 
 @NgModule({
   declarations: [
     AppComponent,
-    AppendPipe //added
+    AppendPipe, //added
+    TaskComponent //added
   ],
   imports: [
     BrowserModule,

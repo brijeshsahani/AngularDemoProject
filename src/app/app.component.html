@@ -164,3 +164,11 @@ hello {{title}} <!--Interpolaction-->
         </div>
     </form>
   </div>
+
+
+   <!-- Components Communication -->
+  <h1>Components Communication</h1>
+  <div>
+    <h1>Task List</h1>
+    <app-task *ngFor="let t of tasks" [childTask]="t" (taskDeleted)="deleteTask(t)"></app-task>
+  </div>

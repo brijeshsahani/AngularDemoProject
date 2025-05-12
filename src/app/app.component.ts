@@ -63,7 +63,7 @@ export class AppComponent implements OnInit{
   //dependency injection (create a sevice, inject using constructor)
   messages: string[] = [];
   // constructor(private messagesService:MessagesService){
-  //   this.messages = messagesService.getMessage();
+  //    this.messages = messagesService.getMessage();
   // }
 
   //for api calling  "ngOnInit automatic trigger"
@@ -78,14 +78,14 @@ export class AppComponent implements OnInit{
       //   console.log(error);
       // });
 
-      // this.messagesService.getPost().subscribe({
-      //   next: (response) => {
-      //     this.posts = response;
-      //   },
-      //   error: (error) => {
-      //     console.error(error);
-      //   },
-      // });
+      this.messagesService.getPost().subscribe({
+        next: (response) => {
+          this.posts = response;
+        },
+        error: (error) => {
+          console.error(error);
+        },
+      });
 
       // //for type checking with interfaces
       // this.messagesService.getPost1().subscribe({
@@ -119,7 +119,7 @@ export class AppComponent implements OnInit{
 
   userReactiveForm! :FormGroup;
 
-  constructor(private formBuilder:FormBuilder){
+  constructor(private formBuilder:FormBuilder ,private messagesService:MessagesService){
     this.userReactiveForm = this.formBuilder.group({
       name: ["", Validators.required],
       email: ["", [
@@ -141,6 +141,7 @@ export class AppComponent implements OnInit{
   }
 
   get phoneNumbers(){
+    console.log(this.userReactiveForm.get('phoneNumbers') as FormArray);
     return this.userReactiveForm.get('phoneNumbers') as FormArray;
   }
 
@@ -160,4 +161,10 @@ export class AppComponent implements OnInit{
     }
   }
 
+  // <!-- Components Communication -->
+  tasks:string[] = ["Task 1", "Task 2", "Task 3"]
+
+  deleteTask(task: string){
+    this.tasks = this.tasks.filter((t) => t !== task);
+  }
 }
